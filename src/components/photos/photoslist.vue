@@ -33,6 +33,8 @@ export default {
     this.scroll();
   },
   methods: {
+    // babel-plugin-transform-remove-strict-mode 由于 mui 中语法与webpack严格模式冲突，导致报错
+    // 以上的包 能关闭 webpack 的严格模式 让 mui 无报错
     scroll() {
       mui(".mui-scroll-wrapper").scroll({
         deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006

@@ -78,12 +78,8 @@ export default {
           margin-top: 10px;
           justify-content: space-between;
           span {
-            // flex: 50%;
             color: #d253b1;
           }
-        //   .touch {
-        //     text-align: right;
-        //   }
         }
       }
     }
