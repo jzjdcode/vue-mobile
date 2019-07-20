@@ -9,16 +9,16 @@
     <!-- 六宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-        <a href="#">
+        <router-link to="/index/newslist">
           <img src="../../images/menu1.png" alt />
-          <div class="mui-media-body">附近</div>
-        </a>
+          <div class="mui-media-body">News</div>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-        <a href="#">
+        <router-link to="/index/photoslist">
           <img src="../../images/menu2.png" alt />
-          <div class="mui-media-body">外卖</div>
-        </a>
+          <div class="mui-media-body">图片</div>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
         <a href="#">
@@ -58,7 +58,7 @@ export default {
   },
   created() {
     Indicator.open({
-      text: "加载中...",
+      text: "马上就好...",
       spinnerType: "double-bounce"
     });
     this.getPic();
@@ -67,7 +67,7 @@ export default {
     // 发起图片请求
     getPic() {
       this.$http
-        .get("http://www.liulongbin.top:3005/api/getlunbo")
+        .get("api/getlunbo")
         .then(res => {
           if (res.body.status == 0) {
             Indicator.close();
@@ -95,7 +95,7 @@ export default {
     width: 100%;
   }
 }
-.mui-grid-view.mui-grid-9 {
+.mui-table-view {
   background-color: #fff;
   border: 0;
   img {
@@ -104,6 +104,15 @@ export default {
   }
   .mui-media-body {
     font-size: 14px;
+  }
+  .mui-active {
+    background-color: #fff !important;
+    text-decoration: none !important;
+  }
+  .mui-table-view-cell {
+    a {
+      text-decoration: none;
+    }
   }
 }
 </style>

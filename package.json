@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "jquery": "^3.4.1",
-    "mint-ui": "^2.2.13"
+    "mint-ui": "^2.2.13",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
