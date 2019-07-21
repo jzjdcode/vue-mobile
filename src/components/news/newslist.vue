@@ -20,6 +20,8 @@
 <script>
 import { Toast } from "mint-ui";
 import { Indicator } from "mint-ui";
+import mui from "../../lib/mui-master/dist/js/mui.js"
+
 export default {
   data() {
     return {
@@ -27,10 +29,10 @@ export default {
     };
   },
   created() {
-    Indicator.open({
-      text: "马上就好...",
-      spinnerType: "double-bounce"
-    });
+    // Indicator.open({
+    //   text: "马上就好...",
+    //   spinnerType: "double-bounce"
+    // });
     this.getNewsList();
   },
   methods: {
@@ -39,7 +41,8 @@ export default {
         .get("api/getnewslist")
         .then(res => {
           if (res.data.status == 0) {
-            Indicator.close();
+            // Indicator.close();
+            
             this.newslist = res.data.message;
           }
         })
@@ -64,7 +67,8 @@ export default {
     a {
       height: 100%;
       text-decoration: none;
-      margin: 20px 0 0;
+      margin: 10px 0 0;
+      white-space: none !important;
       img {
         border-radius: 7px;
       }

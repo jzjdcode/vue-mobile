@@ -5,9 +5,11 @@ import index from './components/tabbar/index.vue'
 import user from './components/tabbar/user.vue'
 import shopcar from './components/tabbar/shopcar.vue'
 import search from './components/tabbar/search.vue'
-import newslist from './components/news/newslist.vue'
-import newslistinfo from './components/news/newslistinfo.vue'
-import photoslist from './components/photos/photoslist.vue'
+import newsList from './components/news/newslist.vue'
+import newsListInfo from './components/news/newslistinfo.vue'
+import photosList from './components/photos/photoslist.vue'
+import photoInfo from './components/photos/photoinfo.vue'
+import goodsList from './components/goods/goodsList.vue'
 
 // 3. 创建路由对象
 let router = new VueRouter({
@@ -17,9 +19,11 @@ let router = new VueRouter({
     { path: '/user', component: user},
     { path: '/shopcar', component: shopcar},
     { path: '/search', component: search},
-    { path: '/index/newslist', component: newslist },
-    { path: '/index/newslist/newslistinfo/:id', component: newslistinfo },
-    { path: '/index/photoslist', component: photoslist }
+    { path: '/index/newslist', component: newsList },
+    { path: '/index/newslist/newslistinfo/:id', component: newsListInfo },
+    { path: '/index/photoslist', component: photosList },
+    { path: '/index/photoslist/photoinfo/:id', component: photoInfo },
+    { path: '/index/goodslist', component: goodsList }
   ],
   linkActiveClass: 'mui-active' // 替换默认的高亮的active类
 })

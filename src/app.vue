@@ -1,11 +1,12 @@
 <template>
   <div class="content">
     <!-- 顶部 header 区域 -->
-    <mt-header
+    <!-- <mt-header
       fixed
       title="自助货架"
       style="background: linear-gradient(to top left, #d253b1, #fb6f4a); font-size: 20px"
-    ></mt-header>
+    ></mt-header>-->
+    <header class="hd">自助货架</header>
 
     <!-- 中间 router-view 区域 -->
     <transition mode="out-in">
@@ -42,9 +43,21 @@
   padding-top: 40px;
   padding-bottom: 50px;
   overflow-x: hidden;
+  .hd {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: linear-gradient(to top left, #d253b1, #fb6f4a);
+    color: #fff;
+    font-size: 20px;
+    z-index: 999;
+  }
   .mui-bar {
     .mui-active {
-      color: #fff!important;
+      color: #fff !important;
       background: linear-gradient(to top left, #d253b1, #fb6f4a);
       text-decoration: none;
     }
