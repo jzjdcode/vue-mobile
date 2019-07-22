@@ -75,7 +75,7 @@ export default {
           content: this.msg
         })
         .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             if(res.data.status == 0) {
                 var userinfo = { user_name: '匿名用户', add_time: Date.now(), content: this.msg }
                 this.commentsarr.unshift(userinfo)

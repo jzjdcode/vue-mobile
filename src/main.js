@@ -30,7 +30,7 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 // 设置全局根域名
-Vue.http.options.root = 'http://www.liulongbin.top:3005/'
+Vue.http.options.root = 'http://47.110.139.196/'
 // 设置全局 post请求体
 Vue.http.options.emulateJSON = true;
 

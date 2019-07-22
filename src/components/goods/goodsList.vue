@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list">
     <ul>
-      <li v-for="item in goodslist" :key="item.id">
+      <router-link v-for="item in goodslist" :key="item.id" :to="'/index/goodslist/goodsinfo/' + item.id" tag="li">
         <img :src=" item.img_url " alt />
         <div class="goods-content">
           <div class="title">
@@ -11,14 +11,14 @@
             <p>{{ item.zhaiyao }}</p>
           </div>
           <div class="price">
-            <span>￥ {{ item.sell_price }}</span>
-            <del>￥ {{ item.market_price }}</del>
+            <span>￥{{ item.sell_price }}</span>
+            <del>￥{{ item.market_price }}</del>
           </div>
           <div class="num">
             <p>剩余 {{ item.stock_quantity }} 件</p>
           </div>
         </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -72,8 +72,8 @@ ul {
     }
     .goods-content {
       background-color: #eee;
-      margin: 0 2px 2px;
-      border-radius: 10px;
+      margin: 10px 2px 2px;
+      border-radius: 7px;
       .title {
         padding: 0 5px;
         h3 {
@@ -81,6 +81,16 @@ ul {
           font-size: 14px;
           text-align: center;
           color: #333;
+          /* 1.0 溢出部分隐藏 */
+          overflow: hidden;
+          /* 2.0 文字溢出部分显示省略号 */
+          text-overflow: ellipsis;
+          /* 3.0 需要设置成弹性盒子 */
+          display: -webkit-box;
+          /* 4.0 最多显示的行数 (不规范的属性) */
+          -webkit-line-clamp: 2;
+          /* 5.0 子元素的排列方式 (不规范的属性) */
+          -webkit-box-orient: vertical;
         }
       }
       .info {

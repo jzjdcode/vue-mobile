@@ -29,10 +29,10 @@ export default {
     };
   },
   created() {
-    // Indicator.open({
-    //   text: "马上就好...",
-    //   spinnerType: "double-bounce"
-    // });
+    Indicator.open({
+      text: "马上就好...",
+      spinnerType: "double-bounce"
+    });
     this.getNewsList();
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
         .get("api/getnewslist")
         .then(res => {
           if (res.data.status == 0) {
-            // Indicator.close();
+            Indicator.close();
             
             this.newslist = res.data.message;
           }

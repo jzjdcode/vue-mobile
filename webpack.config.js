@@ -3,6 +3,7 @@ const htmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // vue-loader 必要的插件
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 module.exports = {
     // 模式
     mode: "development",
@@ -66,8 +67,7 @@ module.exports = {
         ]
     },
     // resovle: {
-    //     alias: { // 修改 vue 被导入包时的路径
-    //         "vue$": "vue/dist/vue.js"
+    //     alias: { 
     //     }
     // }
 

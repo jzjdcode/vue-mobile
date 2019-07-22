@@ -96,7 +96,7 @@
   }
   .v-enter-active,
   .v-leave-active {
-    transition: all 0.3s;
+    transition: all .2s;
   }
 }
 </style>
