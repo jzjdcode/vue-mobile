@@ -24,7 +24,12 @@
     <!-- 图片展示 -->
     <div class="photos">
       <ul>
-        <router-link v-for="item in photoList" :key="item.id" tag="li" :to="'/index/photoslist/photoinfo/' + item.id">
+        <router-link
+          v-for="item in photoList"
+          :key="item.id"
+          tag="li"
+          :to="'/index/photoslist/photoinfo/' + item.id"
+        >
           <img v-lazy="item.img_url" />
           <div class="title-box">
             <h5>{{ item.title }}</h5>
@@ -37,6 +42,9 @@
 </template>
 <script>
 import mui from "../../lib/mui-master/dist/js/mui.js";
+import {getPhotosListApi} from "../../api.js";
+import {getCurrentPhotosApi} from "../../api.js";
+
 export default {
   data() {
     return {
@@ -62,27 +70,32 @@ export default {
 
     // 渲染图片分类
     getPhotosList() {
-      this.$http
-        .get("api/getimgcategory")
+      // this.$http
+      //   .get("api/getimgcategory")
+      getPhotosListApi()
         .then(res => {
-          if (res.data.status == 0) {
-            this.photoArr = res.data.message;
-            this.photoArr.unshift({ id: 0, title: "全部" });
-          }
+          // if (res.data.status == 0) {
+          //   this.photoArr = res.data.message;
+          //   this.photoArr.unshift({ id: 0, title: "全部" });
+          // }
+          this.photoArr = res.message;
+          this.photoArr.unshift({ id: 0, title: "全部" });
         })
-        .catch(err => {});
+        // .catch(err => {});
     },
 
     // 获取各个分类对应图片
     getCurrentPhotos(id) {
-      this.$http
-        .get("api/getimages/" + id)
+      // this.$http
+      //   .get("api/getimages/" + id)
+      getCurrentPhotosApi(id)
         .then(res => {
-          if (res.data.status == 0) {
-            this.photoList = res.data.message;
-          }
+          // if (res.data.status == 0) {
+          //   this.photoList = res.data.message;
+          // }
+          this.photoList = res.message;
         })
-        .catch(err => {});
+        // .catch(err => {});
     }
   }
 };
@@ -118,8 +131,8 @@ ul {
     img {
       width: 100%;
     }
-    img[lazy=loading] {
-      width: 40px;  
+    img[lazy="loading"] {
+      width: 40px;
       height: 300px;
       margin: auto;
     }

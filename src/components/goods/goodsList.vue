@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import { getGoodsListApi } from '../../api.js'
 export default {
   data() {
     return {
@@ -35,15 +36,17 @@ export default {
   },
   methods: {
     getGoodsList() {
-      this.$http
-        .get("api/getgoods?pageindex=" + this.currentPage)
+      // this.$http
+      //   .get("api/getgoods?pageindex=" + this.currentPage)
+      getGoodsListApi(this.currentPage)
         .then(res => {
-          if (res.data.status == 0) {
-            this.goodslist = res.data.message;
-            console.log(this.goodslist);
-          }
+          // if (res.data.status == 0) {
+          //   this.goodslist = res.data.message;
+          //   // console.log(this.goodslist);
+          // }
+          this.goodslist = res.message;
         })
-        .catch(err => {});
+        // .catch(err => {});
     }
   }
 };

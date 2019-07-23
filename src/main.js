@@ -26,13 +26,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // 导入 resource 模块
-import VueResource from 'vue-resource'
-Vue.use(VueResource)
+// import VueResource from 'vue-resource'
+// Vue.use(VueResource)
 
-// 设置全局根域名
-Vue.http.options.root = 'http://47.110.139.196/'
-// 设置全局 post请求体
-Vue.http.options.emulateJSON = true;
+// 设置 vue-resource 全局根域名
+// Vue.http.options.root = 'http://47.110.139.196/'
+// 设置 vue-resource 全局 post请求体
+// Vue.http.options.emulateJSON = true;
 
 // 导入时间插件
 import moment from 'moment'

@@ -19,6 +19,8 @@
 import { Toast } from "mint-ui";
 import { Indicator } from "mint-ui";
 
+import { getNewsInfoApi } from '../../api.js'
+
 // 导入评论区子组件
 import comment from "../subcomponent/comment.vue";
 
@@ -30,32 +32,33 @@ export default {
     };
   },
   created() {
-    Indicator.open({
-      text: "马上就好...",
-      spinnerType: "double-bounce"
-    });
+    // Indicator.open({
+    //   text: "马上就好...",
+    //   spinnerType: "double-bounce"
+    // });
     this.getNewsInfo();
   },
   methods: {
     getNewsInfo() {
-      this.$http
-        .get("api/getnew/" + this.id)
+      // this.$http
+      //   .get("api/getnew/" + this.id)
+        getNewsInfoApi(this.id)
         .then(res => {
-        //   console.log(res.data);
-          if (res.data.status == 0) {
-            Indicator.close();
-            this.newsinfo = res.data.message;
-          }
+          // if (res.data.status == 0) {
+          //   Indicator.close();
+          //   this.newsinfo = res.data.message;
+          // }
+          this.newsinfo = res.message;
         })
-        .catch(err => {
-          Indicator.close();
-          Toast({
-            message: "获取新闻失败",
-            position: "middel",
-            duration: 3000,
-            iconClass: "glyphicon glyphicon-alert"
-          });
-        });
+        // .catch(err => {
+        //   Indicator.close();
+        //   Toast({
+        //     message: "获取新闻失败",
+        //     position: "middel",
+        //     duration: 3000,
+        //     iconClass: "glyphicon glyphicon-alert"
+        //   });
+        // });
     }
   },
   components: {

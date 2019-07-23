@@ -21,6 +21,7 @@
 import { Toast } from "mint-ui";
 import { Indicator } from "mint-ui";
 import mui from "../../lib/mui-master/dist/js/mui.js"
+import { getNewsListApi } from "../../api.js"
 
 export default {
   data() {
@@ -29,32 +30,34 @@ export default {
     };
   },
   created() {
-    Indicator.open({
-      text: "马上就好...",
-      spinnerType: "double-bounce"
-    });
+    // Indicator.open({
+    //   text: "马上就好...",
+    //   spinnerType: "double-bounce"
+    // });
     this.getNewsList();
   },
   methods: {
     getNewsList() {
-      this.$http
-        .get("api/getnewslist")
+      // this.$http
+      //   .get("api/getnewslist")
+        getNewsListApi()
         .then(res => {
-          if (res.data.status == 0) {
-            Indicator.close();
+          // if (res.data.status == 0) {
+          //  Indicator.close();
             
-            this.newslist = res.data.message;
-          }
+          //   this.newslist = res.data.message;
+          // }
+          this.newslist = res.message;
         })
-        .catch(err => {
-          Indicator.close();
-          Toast({
-            message: "获取新闻列失败",
-            position: "middel",
-            duration: 3000,
-            iconClass: "glyphicon glyphicon-alert"
-          });
-        });
+        // .catch(err => {
+        //   Indicator.close();
+        //   Toast({
+        //     message: "获取新闻列失败",
+        //     position: "middel",
+        //     duration: 3000,
+        //     iconClass: "glyphicon glyphicon-alert"
+        //   });
+        // });
     }
   }
 };

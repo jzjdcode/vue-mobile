@@ -48,8 +48,10 @@
   </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
-import { Indicator } from "mint-ui";
+// import { Toast } from "mint-ui";
+// import { Indicator } from "mint-ui";
+import { getIndexPicApi } from '../../api.js'
+
 export default {
   data() {
     return {
@@ -57,32 +59,35 @@ export default {
     };
   },
   created() {
-    Indicator.open({
-      text: "马上就好...",
-      spinnerType: "double-bounce"
-    });
+    // Indicator.open({
+    //   text: "马上就好...",
+    //   spinnerType: "double-bounce"
+    // });
     this.getPic();
   },
   methods: {
     // 发起图片请求
     getPic() {
-      this.$http
-        .get("api/getlunbo")
+      // this.$http
+      //   .get("api/getlunbo")
+        getIndexPicApi()
         .then(res => {
-          if (res.body.status == 0) {
-            Indicator.close();
-            this.swipeArr = res.body.message;
-          }
+          // if (res.body.status == 0) {
+          //   Indicator.close();
+          //   this.swipeArr = res.body.message;
+          // }
+          // console.log(res);
+          this.swipeArr = res.message;
         })
-        .catch(err => {
-          Indicator.close();
-          Toast({
-            message: "获取图片失败",
-            position: "middel",
-            duration: 3000,
-            iconClass: "glyphicon glyphicon-alert"
-          });
-        });
+        // .catch(err => {
+        //   Indicator.close();
+        //   Toast({
+        //     message: "获取图片失败",
+        //     position: "middel",
+        //     duration: 3000,
+        //     iconClass: "glyphicon glyphicon-alert"
+        //   });
+        // });
     }
   }
 };
