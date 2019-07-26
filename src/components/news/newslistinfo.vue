@@ -40,25 +40,10 @@ export default {
   },
   methods: {
     getNewsInfo() {
-      // this.$http
-      //   .get("api/getnew/" + this.id)
         getNewsInfoApi(this.id)
         .then(res => {
-          // if (res.data.status == 0) {
-          //   Indicator.close();
-          //   this.newsinfo = res.data.message;
-          // }
           this.newsinfo = res.message;
         })
-        // .catch(err => {
-        //   Indicator.close();
-        //   Toast({
-        //     message: "获取新闻失败",
-        //     position: "middel",
-        //     duration: 3000,
-        //     iconClass: "glyphicon glyphicon-alert"
-        //   });
-        // });
     }
   },
   components: {

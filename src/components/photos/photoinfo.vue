@@ -45,30 +45,13 @@ export default {
   methods: {
     // 获取图片详情
     getPicInfo() {
-      // this.$http
-      //   .get("api/getimageInfo/" + this.id)
       getPicInfoApi(this.id).then(res => {
-        // if (res.data.status == 0) {
-        //   this.picinfo = res.data.message;
-        // }
         this.picinfo = res.message;
       });
-      // .catch(err => {});
     },
     // 获取缩略图
     getThumbs() {
-      // this.$http
-      //   .get("api/getthumimages/" + this.id)
       getThumbsApi(this.id).then(res => {
-        // if (res.data.status == 0) {
-        //   // console.log(res.data.message)
-        //   res.data.message.forEach(el => {
-        //     el.w = 600;
-        //     el.h = 400;
-        //     el.msrc = el.src;
-        //   });
-        //   this.slide1 = res.data.message;
-        // }
         res.message.forEach(el => {
           el.w = 600;
           el.h = 400;
@@ -76,7 +59,6 @@ export default {
         });
         this.slide1 = res.message;
       });
-      // .catch(err => {});
     }
   }
 };

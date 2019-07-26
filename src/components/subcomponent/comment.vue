@@ -23,6 +23,7 @@
       type="button"
       class="mui-btn mui-btn-success mui-btn-outlined getmore"
       @click="getMore"
+      v-if="display"
     >加载更多...</button>
   </div>
 </template>
@@ -37,7 +38,8 @@ export default {
     return {
       currentPage: 1,
       commentsarr: [],
-      msg: ""
+      msg: "",
+      display: true
     };
   },
   created() {
@@ -47,23 +49,13 @@ export default {
   methods: {
     // 获取评论
     getComment() {
-      // this.$http
-      //   .get("api/getcomments/" + this.id + "?pageindex=" + this.currentPage)
       getCommentApi(this.id, this.currentPage).then(res => {
-        // if (res.data.status == 0) {
-        //   // 每当获取新评论数，把旧数据与新数据进行拼接
-        //   this.commentsarr = this.commentsarr.concat(res.data.message);
-        // }
         this.commentsarr = this.commentsarr.concat(res.message);
+        // 当加载到没有数据时隐藏 加载更多
+        if(res.message.length < 10) {
+          this.display = false
+        }
       });
-      // .catch(err => {
-      //   Toast({
-      //     message: "获取评论失败",
-      //     position: "middel",
-      //     duration: 3000,
-      //     iconClass: "glyphicon glyphicon-alert"
-      //   });
-      // });
     },
     // 获取更多评论
     getMore() {
@@ -73,22 +65,8 @@ export default {
     // 发表评论
     postcomment() {
       // 发送 post 请求
-      // this.$http
-      //   .post("api/postcomment/" + this.id, {
-      //     content: this.msg
-      //   })
       postCommentApi(this.id, this.msg)
         .then(res => {
-          // console.log(res.data);
-          // if (res.data.status == 0) {
-          //   var userinfo = {
-          //     user_name: "匿名用户",
-          //     add_time: Date.now(),
-          //     content: this.msg
-          //   };
-          //   this.commentsarr.unshift(userinfo);
-          //   this.msg = "";
-          // }
           var userinfo = {
               user_name: "匿名用户",
               add_time: Date.now(),
@@ -97,7 +75,6 @@ export default {
             this.commentsarr.unshift(userinfo);
             this.msg = "";
         })
-        // .catch(err => {});
     }
   }
 };

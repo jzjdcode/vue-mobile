@@ -55,3 +55,18 @@ export const getThumbsApi = params => {
 export const getGoodsListApi = params => {
     return request.get("getgoods?pageindex=" + params)
 }
+
+// 获取商品轮播图
+export const getGoodsListSlideApi = params => {
+    return request.get("getthumimages/" + params)
+}
+
+// 获取商品简介
+export const getGoodsListInfoIntroApi = params => {
+    return request.get("goods/getinfo/" + params)
+}
+
+// 获取商品图文详情
+export const getGoodsDescApi = params => {
+    return request.get("goods/getdesc/" + params)
+}

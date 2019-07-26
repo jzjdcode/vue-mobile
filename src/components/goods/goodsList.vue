@@ -1,8 +1,21 @@
 <template>
   <div class="goods-list">
     <ul>
-      <router-link v-for="item in goodslist" :key="item.id" :to="'/index/goodslist/goodsinfo/' + item.id" tag="li">
-        <img :src=" item.img_url " alt />
+      <!-- 网页中有两种跳转方式：
+      1. 使用 a 标签跳转 叫做 标签跳转
+      2. 使用 window.location.href 叫做编程式导航-->
+
+      <!-- 要区分 this.$route 和 this.$router 这两个对象
+      其中 this.$route 是路由参数对象，所有路由中的参数, parmas, query 都属于它 
+      this.$router 是一个路由导航对象，用它可以使用js代码，实现路由的前进和后退、跳转新的 url 地址-->
+      <!-- <router-link
+        v-for="item in goodslist"
+        :key="item.id"
+        :to="'/index/goodslist/goodsinfo/' + item.id"
+        tag="li"
+      >-->
+      <li v-for="item in goodslist" :key="item.id" @click="getHref(item.id)">
+        <img :src=" item.img_url " :alt="item.title" />
         <div class="goods-content">
           <div class="title">
             <h3>{{ item.title }}</h3>
@@ -18,17 +31,20 @@
             <p>剩余 {{ item.stock_quantity }} 件</p>
           </div>
         </div>
-      </router-link>
+      </li>
+      <mt-button type="danger" plain size="large" @click="getGoodsListMore" v-if="display">加载更多...</mt-button>
     </ul>
   </div>
 </template>
 <script>
-import { getGoodsListApi } from '../../api.js'
+import { getGoodsListApi } from "../../api.js";
+
 export default {
   data() {
     return {
       currentPage: 1,
-      goodslist: []
+      goodslist: [],
+      display: true
     };
   },
   created() {
@@ -36,17 +52,21 @@ export default {
   },
   methods: {
     getGoodsList() {
-      // this.$http
-      //   .get("api/getgoods?pageindex=" + this.currentPage)
-      getGoodsListApi(this.currentPage)
-        .then(res => {
-          // if (res.data.status == 0) {
-          //   this.goodslist = res.data.message;
-          //   // console.log(this.goodslist);
-          // }
-          this.goodslist = res.message;
-        })
-        // .catch(err => {});
+      getGoodsListApi(this.currentPage).then(res => {
+        this.goodslist = this.goodslist.concat(res.message);
+        // 当加载到没有数据时隐藏 加载更多
+        if (res.message.length < 10) {
+          this.display = false;
+        }
+      });
+    },
+    getGoodsListMore() {
+      this.currentPage++;
+      this.getGoodsList();
+    },
+    // 编程式跳转
+    getHref(id) {
+      this.$router.push({ name: "goodsInfo", params: { id } });
     }
   }
 };
@@ -58,7 +78,7 @@ ul {
   margin: 0;
   padding: 8px;
   flex-wrap: wrap; // 换行
-  justify-content: space-between; // 子盒子贴边
+  justify-content: space-between; // 子盒子默认横向贴边
   li {
     display: flex;
     flex-direction: column; // 内容以纵向排列
@@ -72,6 +92,10 @@ ul {
     overflow: hidden;
     img {
       width: 100%;
+      text-align: center;
+      padding: 5px; 
+      padding-bottom: 0;
+      border-radius: 10px;
     }
     .goods-content {
       background-color: #eee;
@@ -105,6 +129,7 @@ ul {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          
         }
       }
       .price {

@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="2000">
-      <mt-swipe-item v-for="item in swipeArr" :key="item.id">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-    </mt-swipe>
+    <slide :swipelist="swipeArr"></slide>
     <!-- 六宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
@@ -48,46 +44,29 @@
   </div>
 </template>
 <script>
-// import { Toast } from "mint-ui";
-// import { Indicator } from "mint-ui";
-import { getIndexPicApi } from '../../api.js'
+import { getIndexPicApi } from "../../api.js";
+
+// 引入轮播图组件
+import slide from "../subcomponent/slide.vue";
 
 export default {
   data() {
     return {
-      swipeArr: null
+      swipeArr: []
     };
   },
   created() {
-    // Indicator.open({
-    //   text: "马上就好...",
-    //   spinnerType: "double-bounce"
-    // });
     this.getPic();
+  },
+  components: {
+    slide
   },
   methods: {
     // 发起图片请求
     getPic() {
-      // this.$http
-      //   .get("api/getlunbo")
-        getIndexPicApi()
-        .then(res => {
-          // if (res.body.status == 0) {
-          //   Indicator.close();
-          //   this.swipeArr = res.body.message;
-          // }
-          // console.log(res);
-          this.swipeArr = res.message;
-        })
-        // .catch(err => {
-        //   Indicator.close();
-        //   Toast({
-        //     message: "获取图片失败",
-        //     position: "middel",
-        //     duration: 3000,
-        //     iconClass: "glyphicon glyphicon-alert"
-        //   });
-        // });
+      getIndexPicApi().then(res => {
+        this.swipeArr = res.message;
+      });
     }
   }
 };

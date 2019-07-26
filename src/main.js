@@ -13,7 +13,7 @@ Vue.use(less)
 // Vue.component(Header.name, Header)
 // Vue.component(Swipe.name, Swipe);
 // Vue.component(SwipeItem.name, SwipeItem);
-import Mint from 'mint-ui' // mint 图片懒加载需要全部导入
+import Mint from 'mint-ui'// mint 图片懒加载需要全部导入
 Vue.use(Mint)
 
 // 导入缩略图插件

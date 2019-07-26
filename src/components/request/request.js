@@ -35,11 +35,11 @@ resInstance.interceptors.request.use(config => {
 // 响应拦截器
 resInstance.interceptors.response.use(res => {
     // 浏览器状态码为 200 时返回响应res
-    Toast({
-        message: "响应成功",
-        position: "middle",
-        duration: 500
-    })
+    // Toast({
+    //     message: "响应成功",
+    //     position: "middle",
+    //     duration: 500
+    // })
     // 判断res 中的 status 值
     if (res.data.status == 0) return res.data
     // console.log(res.data);
