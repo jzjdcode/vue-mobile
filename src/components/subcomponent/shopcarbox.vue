@@ -5,7 +5,7 @@
       <!-- "-"按钮，点击可减小当前数值 -->
       <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
       <!-- change 事件监听到输入框中值的改变 -->
-      <input class="mui-numbox-input" type="number" value="1" @change="countChange" ref="numbox" />
+      <input class="mui-numbox-input" type="number" :value="initcount" ref="numbox" @change="countChange" />
       <!-- "+"按钮，点击可增大当前数值 -->
       <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
     </div>
@@ -20,21 +20,16 @@ export default {
     // console.log(this.maxNum);
   },
   methods: {
+    // 监听 数量发生改变
+    // 没当数值改变，则立即把最新的数量同步到 购物车 store 中，覆盖之前的数量
     countChange() {
-      // 每当文本框数据被修改的时候，把 最新的数据，通过事件传递给父组件
-      this.$emit("getMaxCount", parseInt(this.$refs.numbox.value));
-      // console.log(this.$refs.numbox.value);
+      this.$store.commit("updateGoodsNum", {
+        id: this.goodsid,
+        count: this.$refs.numbox.value
+      })
     }
   },
-  watch: {
-    // 监听 maxNum
-    "maxNum": function(newval, oldval) {
-      mui(".mui-numbox")
-        .numbox()
-        .setOption("max", newval); // 官网文档固定写法 max 
-      // console.log(newval);
-    }
-  }
+  props: [ "initcount", "goodsid"],
 };
 </script>
 <style lang="less" >

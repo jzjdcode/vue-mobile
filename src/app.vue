@@ -1,12 +1,22 @@
 <template>
   <div class="content">
     <!-- 顶部 header 区域 -->
-    <!-- <mt-header
+    <mt-header
       fixed
       title="自助货架"
-      style="background: linear-gradient(to top left, #d253b1, #fb6f4a); font-size: 20px"
-    ></mt-header>-->
-    <header class="hd">自助货架</header>
+      style="background: linear-gradient(to top left, #d253b1, #fb6f4a)"
+    >
+      <span slot="left" @click="goBack" v-show="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
+
+    <!-- <mt-header >
+      <span slot="left" @click="goBack" v-show="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+      <span class="hd">自助货架</span> 
+    </mt-header> -->
 
     <!-- 中间 router-view 区域 -->
     <transition mode="out-in">
@@ -25,7 +35,7 @@
       </router-link>
       <router-link to="/shopcar" class="mui-tab-item1" href="#tabbar-with-contact">
         <span class="mui-icon mui-icon-extra mui-icon-extra-express">
-          <span class="mui-badge" id="shop_car_icon">10w+</span>
+          <span class="mui-badge" id="shop_car_icon">{{ $store.getters.countNum }}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
@@ -37,8 +47,36 @@
   </div>
 </template>
 <script>
+// import func from '../vue-temp/vue-editor-bridge';
+export default {
+  data() {
+    return {
+      flag: false
+    };
+  },
+  created() {
+    this.flag = this.$route.path === "/index" ? false : true;
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    }
+  },
+  watch: {
+    "$route.path": function(newVal) {
+      if (newVal === "/index") {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
+.mint-header-title {
+  margin: 0;
+}
 .content {
   padding-top: 40px;
   padding-bottom: 50px;
@@ -96,7 +134,7 @@
   }
   .v-enter-active,
   .v-leave-active {
-    transition: all .2s;
+    transition: all 0.2s;
   }
 }
 </style>

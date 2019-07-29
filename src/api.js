@@ -70,3 +70,8 @@ export const getGoodsListInfoIntroApi = params => {
 export const getGoodsDescApi = params => {
     return request.get("goods/getdesc/" + params)
 }
+
+// 获取购物车列表
+export const getShopCarListApi = params => {
+    return request.get("goods/getshopcarlist/" + params)
+}

@@ -52,8 +52,8 @@ export default {
       getCommentApi(this.id, this.currentPage).then(res => {
         this.commentsarr = this.commentsarr.concat(res.message);
         // 当加载到没有数据时隐藏 加载更多
-        if(res.message.length < 10) {
-          this.display = false
+        if (res.message.length < 10) {
+          this.display = false;
         }
       });
     },
@@ -65,16 +65,15 @@ export default {
     // 发表评论
     postcomment() {
       // 发送 post 请求
-      postCommentApi(this.id, this.msg)
-        .then(res => {
-          var userinfo = {
-              user_name: "匿名用户",
-              add_time: Date.now(),
-              content: this.msg
-            };
-            this.commentsarr.unshift(userinfo);
-            this.msg = "";
-        })
+      postCommentApi(this.id, this.msg).then(res => {
+        var userinfo = {
+          user_name: "匿名用户",
+          add_time: Date.now(),
+          content: this.msg
+        };
+        this.commentsarr.unshift(userinfo);
+        this.msg = "";
+      });
     }
   }
 };
@@ -106,7 +105,10 @@ export default {
     width: 100%;
     border-radius: 7px;
   }
-  .mui-table-view {
+  > .mui-table-view {
+      background-color: transparent;
+    margin-bottom: 0;
+    
     .mui-table-view-cell {
       padding: 3px 0 10px;
       .hd {
@@ -123,6 +125,9 @@ export default {
   }
   .getmore {
     margin: 20px 0;
+  }
+  .mui-table-view:after {
+    height: 1px;
   }
 }
 </style>

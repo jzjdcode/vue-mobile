@@ -26,7 +26,7 @@ let router = new VueRouter({
     { path: '/index/newslist/newslistinfo/:id', component: newsListInfo },
     { path: '/index/photoslist', component: photosList },
     { path: '/index/photoslist/photoinfo/:id', component: photoInfo },
-    { path: '/index/goodslist', component: goodsList },
+    { path: '/index/goodslist', component: goodsList, name: "goodsList" },
     { path: '/index/goodslist/goodsinfo/:id', component: goodsInfo, name: "goodsInfo" },
     { path: '/index/goodslist/goodsinfo/goodsdesc/:id', component: goodsDesc, name: 'goodsDesc' },
     { path: '/index/goodslist/goodsinfo/goodscomm/:id', component: goodsComm, name: 'goodsComm' },

@@ -22,7 +22,7 @@ export default {
       getGoodsDescApi(this.id)
         .then(res => {
           this.goodsDesc = res.message[0];
-          console.log(this.goodsDesc);
+          // console.log(this.goodsDesc);
         })
         .catch(err => {});
     }

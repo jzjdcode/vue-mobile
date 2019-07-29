@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="goodsInfo-main">
     <!-- 轮播图区 -->
     <div class="mui-card">
       <!--内容区-->
@@ -30,10 +30,12 @@
           购买数量：
           <!-- 数字输入框组件 -->
           <numbox
-            style="display: inline-block;"
+            style="display: inline-block; margin-right: 10px; margin-bottom: 10px"
             @getMaxCount="getMaxNumCount"
             :maxNum="goodsListInfoIntro.stock_quantity"
           ></numbox>
+          <br />剩余数量：
+          <span>{{ goodsListInfoIntro.stock_quantity }} 件</span>
         </div>
         <div class="buy-btn">
           <button
@@ -53,7 +55,7 @@
       <!--内容区-->
       <div class="mui-card-content">
         <p>商品货号：{{ goodsListInfoIntro.goods_no }}</p>
-        <p>库存数量：{{ goodsListInfoIntro.stock_quantity }} 件</p>
+        <!-- <p>库存数量：{{ goodsListInfoIntro.stock_quantity }} 件</p> -->
         <p>上架时间：{{ goodsListInfoIntro.add_time | dateFormat }}</p>
       </div>
       <!--页脚，放置补充信息或支持的操作-->
@@ -125,7 +127,16 @@ export default {
     // 加入购物车(小球图标)
     addShopCar() {
       this.showball = !this.showball;
-      //   console.log(this.showball);
+      // { id: 商品id, count: 购买数, price: 单价, selected: true（是否为选中）} 需要存储在 vuex 中的商品对象
+      let addGoodsList = {
+        id: this.id,
+        count: this.maxCount,
+        price: this.goodsListInfoIntro.sell_price,
+        stock: this.goodsListInfoIntro.stock_quantity,
+        selected: true
+      };
+      // 调用 vuex 中的 addToShopCar 方法，将商品信息传入 mutations 方法中
+      this.$store.commit("addToShopCar", addGoodsList)
     },
     // 小球运动钩子函数
     // 小球动画优化思路
@@ -135,7 +146,7 @@ export default {
     // 4. 如何获取小球位置: domObject.getBoundingClienRect()
     beforeEnter(el) {
       // 起始位置
-    //   el.style.opacity = 1;
+      //  el.style.opacity = 1;
       el.style.transform = "translate(0, 0)";
     },
     enter(el, done) {
@@ -155,15 +166,16 @@ export default {
       // 相对位移
       el.style.transform = `translate(${relaDistX}px, ${relaDistY}px)`;
       // 过渡效果
-      el.style.transition = "all .7s";
+      el.style.transition = "all .3s";
       done();
     },
     afterEnter(el) {
+      // 位移结束后隐藏小球
       this.showball = !this.showball;
     },
     getMaxNumCount(count) {
       this.maxCount = count;
-      console.log(this.maxCount);
+      //   console.log(this.maxCount);
     }
   },
   components: {
@@ -173,13 +185,13 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.main {
+.goodsInfo-main {
   background-color: #eee;
   overflow: hidden;
   .ball {
     position: absolute;
-    top: 368px;
-    left: 156px;
+    top: 383px;
+    left: 152px;
     width: 15px;
     height: 15px;
     background-color: red;
@@ -209,6 +221,7 @@ export default {
       }
       .buy-num {
         padding: 10px 0;
+        font-size: 13px;
       }
       .buy-btn {
         display: flex;
